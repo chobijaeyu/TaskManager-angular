@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { taskItem } from 'src/app/models/task.models';
 
 @Component({
   selector: 'card-task-item',
@@ -8,8 +7,8 @@ import { taskItem } from 'src/app/models/task.models';
 })
 export class TaskItemComponent implements OnInit {
 
-   @Input() items  
-
+   @Input() litsData  
+  items = this.litsData["items"]
   constructor() { }
 
   ngOnInit() {

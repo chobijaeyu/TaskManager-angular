@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 const componentList = [HeaderComponent, BaseComponent]
 @NgModule({
   declarations: [componentList],
-  imports: [ShareModule, TaskModule, AppRoutingModule],
+  imports: [ShareModule, AppRoutingModule],
   exports: [componentList]
 })
 export class CoreModule { }

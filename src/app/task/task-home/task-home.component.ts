@@ -6,26 +6,33 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./task-home.component.sass']
 })
 export class TaskHomeComponent implements OnInit {
-  taskLists = [
+  data = [
     {
-      ID: 1, title: "チェック　Task", taskItems:
-        [
-          { itemID: 1, prefix: "Z-S", endNum: 75, notice: "" },
-          { itemID: 2, prefix: "A-Z", endNum: 20, notice: "注意" }
-        ]
+      listID: 1, prefix: "A-Z", endNum: 75, title: "チェック", items: [
+        { itemID: 1, currenNum: 1, notice: "" },
+        { itemID: 2, currenNum: 2, notice: "" },
+        { itemID: 3, currenNum: 3, notice: "" },
+        { itemID: 4, currenNum: 4, notice: "" },
+        { itemID: 5, currenNum: 5, notice: "" },
+      ]
     },
     {
-      ID: 2, title: "掃除　Task", taskItems:
-        [
-          { itemID: 3, prefix: "A-B", endNum: 50, notice: "" }
-        ]
-
+      listID: 2, prefix: "A-Z", endNum: 75, title: "掃除", items: [
+        { itemID: 1, currenNum: 1, notice: "" },
+        { itemID: 2, currenNum: 2, notice: "" },
+        { itemID: 3, currenNum: 3, notice: "" },
+        { itemID: 4, currenNum: 4, notice: "" },
+        { itemID: 5, currenNum: 5, notice: "" },
+      ]
     },
     {
-      ID: 3, title: "梱包　Task", taskItems:
-        [
-          { itemID: 4, prefix: "T-B", endNum: 50, notice: "" }
-        ]
+      listID: 3, prefix: "A-Z", endNum: 75, title: "梱包", items: [
+        { itemID: 1, currenNum: 1, notice: "" },
+        { itemID: 2, currenNum: 2, notice: "" },
+        { itemID: 3, currenNum: 3, notice: "" },
+        { itemID: 4, currenNum: 4, notice: "" },
+        { itemID: 5, currenNum: 5, notice: "" },
+      ]
     },
   ]
   constructor() { }

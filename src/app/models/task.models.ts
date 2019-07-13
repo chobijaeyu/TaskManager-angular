@@ -1,11 +1,12 @@
 export interface tasklist {
     ID: number,
-    title: string,
-    taskitem:taskitem[]
+    Title: string,
+    Taskitem:taskitem[]
+    Prefix: string,
+    EndNum:number
 }
 export interface taskitem {
-    itemId: number,
-    prefix: string,
-    currentNum: number,
-    notice: string
+    Id: number,
+    CurrentNum: number,
+    Notice: string
 }
