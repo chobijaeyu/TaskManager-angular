@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<p>内容を入力して下さい</p>
+<div mat-dialog-content class="objData-form">
+  <mat-form-field appearance="outline" class="objData-field">
+      <mat-label>prefix</mat-label>
+    <input matInput [(ngModel)]="objData.Title">
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="objData-field">
+    <mat-label>total Num</mat-label>
+    <input matInput [(ngModel)]="objData.EndNum">
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="objData-field">
+    <mat-label>Deadline</mat-label>
+    <input matInput [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="Deadline"
+      [(ngModel)]="objData.Deadline">
+    <owl-date-time #dt1></owl-date-time>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick()">No Thanks</button>
+  <button mat-raised-button [mat-dialog-close]="objData" cdkFocusInitial>Ok</button>
+</div>
+<pre>{{objData | json}}</pre>

@@ -13,9 +13,4 @@ export class ProjectItemComponent implements OnInit {
   ngOnInit() {
   }
 
-  onCardClick(ID){
-    console.log("click ID",ID)
-    this.router.navigate(['/taskHome'])
-  }
-
 }
