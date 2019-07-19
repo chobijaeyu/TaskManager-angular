@@ -1,18 +1,23 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, AfterViewChecked } from '@angular/core';
 
 @Component({
   selector: 'card-task-item',
   templateUrl: './task-item.component.html',
   styleUrls: ['./task-item.component.sass']
 })
-export class TaskItemComponent implements OnInit {
+export class TaskItemComponent implements OnInit,AfterViewInit {
 
-   @Input() litsData  
-  items = this.litsData["items"]
+   @Input() itemData  
   constructor() { }
 
   ngOnInit() {
-
+    console.log(this.itemData)
+    
   }
-
+  
+  ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    
+  }
 }

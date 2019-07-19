@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 
 const routes: Routes = [
     {path:'',loadChildren:()=>import('../project/project.module').then(m => m.ProjectModule)},
-    {path:'tasklist/:ID',loadChildren:()=>import('../task/task.module').then(m => m.TaskModule)},
+    {path:'taskList/:ID',loadChildren:()=>import('../task/task.module').then(m => m.TaskModule)},
     // { path: '', component:BaseComponent }
     //{ path: 'path/:routeParam', component: MyComponent },
     //{ path: 'staticPath', component: ... },

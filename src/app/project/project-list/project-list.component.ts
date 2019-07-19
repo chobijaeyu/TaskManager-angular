@@ -48,16 +48,18 @@ export class ProjectListComponent implements OnInit {
       }
       this.data = res
       this.sendProject(this.data)
-      this.projectlist.push(res)
     },
     () => console.log('Observer got a complete notification'))
     console.log(this.data)
   }
-
+  
   sendProject(data){
     this.projectDataService.NewProject(data).subscribe(
       res=>{
         console.log(res)
+        this.data.ID = res.ID
+        console.log(this.data)
+        this.projectlist.push(this.data)
       },
       err =>{
         console.error(err)

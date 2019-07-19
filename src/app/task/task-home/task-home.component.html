@@ -1,5 +1,5 @@
 <mat-list class="task-container">
-    <mat-list-item *ngFor="let taskList of data">
-        <card-task-list [item]="taskList"></card-task-list>
+    <mat-list-item *ngFor="let task of TaskList">
+        <card-task-list [task]="task"></card-task-list>
     </mat-list-item>
 </mat-list>

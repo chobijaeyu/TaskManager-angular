@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Route } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProjectDataService } from 'src/app/services/project-data.service';
 
 @Component({
   selector: 'card-task-home',
@@ -7,12 +8,32 @@ import { Route } from '@angular/router';
   styleUrls: ['./task-home.component.sass']
 })
 export class TaskHomeComponent implements OnInit {
+  ProjectData ={}
 
-  constructor() { }
+  TaskList = [{Title:"チェック",Status:1,data:[]},{Title:"掃除",Status:2,data:[]},{Title:"梱包",Status:3,data:[]}]
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private taskDataService:ProjectDataService,
+  ) {
+    let ID = this.route.snapshot.paramMap.get("ID")
+    console.log(ID) 
+    this.taskDataService.GetOneProject(ID).subscribe(
+      res =>{
+        this.ProjectData = res.Data
+        this.TaskList.forEach(el=>{
+          el.data=this.ProjectData['Tasklist'].filter(x => x["Status"]===el.Status)
+        })
+        console.log(this.TaskList)
+      },
+      err=>{console.error(err)}
+    )
+
+   }
 
   ngOnInit() {
+
+
   }
-
-
 
 }
