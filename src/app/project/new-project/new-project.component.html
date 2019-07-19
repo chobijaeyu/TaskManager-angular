@@ -2,12 +2,12 @@
 <p>内容を入力して下さい</p>
 <div mat-dialog-content class="objData-form">
   <mat-form-field appearance="outline" class="objData-field">
-      <mat-label>prefix</mat-label>
-    <input matInput [(ngModel)]="objData.Title">
+    <mat-label>prefix</mat-label>
+    <input matInput [(ngModel)]="objData.Prefix">
   </mat-form-field>
   <mat-form-field appearance="outline" class="objData-field">
     <mat-label>total Num</mat-label>
-    <input matInput [(ngModel)]="objData.EndNum">
+    <input matInput type="number" [(ngModel)]="objData.EndNum">
   </mat-form-field>
   <mat-form-field appearance="outline" class="objData-field">
     <mat-label>Deadline</mat-label>
@@ -17,7 +17,7 @@
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button (click)="onNoClick()">No Thanks</button>
-  <button mat-raised-button [mat-dialog-close]="objData" cdkFocusInitial>Ok</button>
+  <button mat-raised-button color="warn" (click)="onNoClick()">No Thanks</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="objData" cdkFocusInitial>Ok</button>
 </div>
 <pre>{{objData | json}}</pre>

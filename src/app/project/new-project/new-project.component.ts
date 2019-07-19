@@ -10,7 +10,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class NewProjectComponent implements OnInit {
 
-  objData = { Title: "", Deadline: "", EndNum: null, Tasklist: [] }
+  objData = { Prefix: "", Deadline: "", EndNum: null, Tasklist: [] }
 
   constructor(
     public dialogRef: MatDialogRef<NewProjectComponent>,

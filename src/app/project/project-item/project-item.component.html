@@ -1,11 +1,11 @@
 <mat-card >
     <mat-card-header>
-        <mat-card-title>{{projectItem.title}}</mat-card-title>
+        <mat-card-title>{{projectItem.Prefix}}</mat-card-title>
         <mat-card-subtitle>subtitle</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
         <mat-icon>card_membership</mat-icon>
-        <p>{{projectItem.endNum}}まで</p>
+        <p>{{projectItem.EndNum}}まで</p>
     </mat-card-content>
     <mat-card-actions>
         <a [routerLink]="[ '/taskList', projectItem.ID ]"><button mat-button>詳細</button></a>

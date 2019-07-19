@@ -4,13 +4,14 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from './MaterialModule';
 import { ConfirmDialogComponent } from './component/confirm-dialog/confirm-dialog.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
-const componentModuleList = [CommonModule,RouterModule]
-const Module = [FormsModule]
+const componentModuleList = [CommonModule,RouterModule,FormsModule,HttpClientModule]
+
 @NgModule({
   declarations: [ConfirmDialogComponent],
-  imports: [MaterialModule, componentModuleList,Module],
-  exports: [MaterialModule, componentModuleList,Module],
+  imports: [MaterialModule, componentModuleList],
+  exports: [MaterialModule, componentModuleList],
   entryComponents:[ConfirmDialogComponent]
 })
 export class ShareModule { }

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
-import { ConfirmDialogComponent } from 'src/app/share/component/confirm-dialog/confirm-dialog.component';
 import { NewProjectComponent } from '../new-project/new-project.component';
+import { ProjectDataService } from 'src/app/services/project-data.service';
+import { take,} from 'rxjs/operators';
 
 @Component({
   selector: 'card-project-list',
@@ -11,13 +12,18 @@ import { NewProjectComponent } from '../new-project/new-project.component';
 })
 export class ProjectListComponent implements OnInit {
 
-  projectlist = [
-    { ID: 1, title: "A-Z", endNum: 50 },
-    { ID: 2, title: "Z-S", endNum: 75 },
-  ]
-  constructor(private router: Router, private dialog: MatDialog) { }
+  projectlist = []
+  data:any
+  constructor(private router: Router, private dialog: MatDialog, private projectDataService: ProjectDataService) { }
 
   ngOnInit() {
+    this.projectDataService.GetProjectlist().subscribe(
+      res => {
+        console.log(res.Data)
+        this.projectlist = res.Data
+      },
+      err=>{console.error(err)}
+    )
   }
 
   onClickCard(ID) {
@@ -28,8 +34,35 @@ export class ProjectListComponent implements OnInit {
   openNewProjectDialog() {
     const dialogRef = this.dialog.open(NewProjectComponent, { data: { title: "リストを追加" } })
 
-    dialogRef.afterClosed().subscribe(res => {
+    dialogRef.afterClosed().pipe(
+      take(1)
+    ).subscribe(res => {
       console.log(res)
-    })
+      for (var i = 1; i <= Number(res.EndNum); i++) {
+        res.Tasklist.push({
+          Prefix: res.Prefix,
+          CurrentNum: i,
+          Notice: "",
+          Status: 1
+        })
+      }
+      this.data = res
+      this.sendProject(this.data)
+      this.projectlist.push(res)
+    },
+    () => console.log('Observer got a complete notification'))
+    console.log(this.data)
+  }
+
+  sendProject(data){
+    this.projectDataService.NewProject(data).subscribe(
+      res=>{
+        console.log(res)
+      },
+      err =>{
+        console.error(err)
+      },
+      () => console.log('Observer got a complete notification')
+    )
   }
 }
