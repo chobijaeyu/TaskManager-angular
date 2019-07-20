@@ -24,4 +24,8 @@ export class ProjectDataService {
     let _tasktUrl = `${projectUrl}/${ID}`
     return this.H.get(_tasktUrl)
   }
+
+  DeleteProject(ID: string): Observable<any> {
+    return this.H.delete(`${projectUrl}/${ID}`)
+  }
 }

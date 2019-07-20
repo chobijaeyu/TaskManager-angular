@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProjectDataService } from 'src/app/services/project-data.service';
 
 @Component({
   selector: 'card-project-item',
@@ -7,10 +8,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./project-item.component.sass']
 })
 export class ProjectItemComponent implements OnInit {
-  @Input() projectItem 
-  constructor(private router:Router) { }
+  @Input() projectItem
+  @Output() Deleteproject= new EventEmitter()
+  constructor(
+    private router: Router,
+    private dataService: ProjectDataService,
+  ) { }
 
   ngOnInit() {
   }
 
+  onDeleteProject(ID) {
+    this.dataService.DeleteProject(ID).subscribe(
+      res => {console.log(ID),this.Deleteproject.emit(ID)},
+      err => console.error(err)
+    )
+  }
 }

@@ -11,8 +11,6 @@ export class TaskItemComponent implements OnInit,AfterViewInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.itemData)
-    
   }
   
   ngAfterViewInit(): void {

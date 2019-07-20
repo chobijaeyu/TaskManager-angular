@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { NewProjectComponent } from '../new-project/new-project.component';
 import { ProjectDataService } from 'src/app/services/project-data.service';
-import { take,} from 'rxjs/operators';
+import { take, } from 'rxjs/operators';
 
 @Component({
   selector: 'card-project-list',
@@ -13,8 +13,13 @@ import { take,} from 'rxjs/operators';
 export class ProjectListComponent implements OnInit {
 
   projectlist = []
-  data:any
-  constructor(private router: Router, private dialog: MatDialog, private projectDataService: ProjectDataService) { }
+  data: any
+  constructor(
+    private router: Router,
+    private dialog: MatDialog,
+    private projectDataService: ProjectDataService,
+    private CDR: ChangeDetectorRef
+  ) { }
 
   ngOnInit() {
     this.projectDataService.GetProjectlist().subscribe(
@@ -22,8 +27,14 @@ export class ProjectListComponent implements OnInit {
         console.log(res.Data)
         this.projectlist = res.Data
       },
-      err=>{console.error(err)}
-    )
+      err => { console.error(err) },
+      () => console.log('onOnit Observer got a complete notification'))
+  }
+
+  _deleteProject(event) {
+    console.log(event)
+    this.projectlist = this.projectlist.filter(x => x.ID !== event)
+    this.CDR.markForCheck()
   }
 
   onClickCard(ID) {
@@ -49,19 +60,18 @@ export class ProjectListComponent implements OnInit {
       this.data = res
       this.sendProject(this.data)
     },
-    () => console.log('Observer got a complete notification'))
-    console.log(this.data)
+      () => console.log('Observer got a complete notification'))
   }
-  
-  sendProject(data){
+
+  sendProject(data) {
     this.projectDataService.NewProject(data).subscribe(
-      res=>{
+      res => {
         console.log(res)
         this.data.ID = res.ID
         console.log(this.data)
         this.projectlist.push(this.data)
       },
-      err =>{
+      err => {
         console.error(err)
       },
       () => console.log('Observer got a complete notification')

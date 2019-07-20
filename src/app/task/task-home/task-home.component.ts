@@ -21,10 +21,10 @@ export class TaskHomeComponent implements OnInit {
     this.taskDataService.GetOneProject(ID).subscribe(
       res =>{
         this.ProjectData = res.Data
+        console.log(this.ProjectData)
         this.TaskList.forEach(el=>{
           el.data=this.ProjectData['Tasklist'].filter(x => x["Status"]===el.Status)
         })
-        console.log(this.TaskList)
       },
       err=>{console.error(err)}
     )

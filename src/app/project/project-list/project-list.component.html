@@ -1,6 +1,6 @@
 <div class="projectlist-container">
 <card-project-item
-*ngFor="let projectItem of projectlist" [projectItem]="projectItem"></card-project-item>
+*ngFor="let projectItem of projectlist" [projectItem]="projectItem" (Deleteproject)="_deleteProject($event)"></card-project-item>
 </div>
 <button mat-fab (click)="openNewProjectDialog()" type="button" class="fab-button">
     <mat-icon>add</mat-icon>
