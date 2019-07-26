@@ -39,7 +39,7 @@ export class ProjectListComponent implements OnInit {
 
   onClickCard(ID) {
     console.log("click card", ID)
-    this.router.navigate(['taskHome/:ID'])
+    this.router.navigate(['taskHome/:ID', { Deadline: this.projectlist[ID]['Deadline'] }])
   }
 
   openNewProjectDialog() {

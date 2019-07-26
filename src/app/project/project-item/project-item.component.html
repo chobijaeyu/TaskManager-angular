@@ -8,7 +8,7 @@
         <p>{{projectItem.EndNum}}まで</p>
     </mat-card-content>
     <mat-card-actions [ngStyle]="{'display':'flex'}">
-        <a [routerLink]="[ '/taskList', projectItem.ID ]"><button mat-raised-button color="primary">詳細</button></a>
+        <a [routerLink]="[ '/taskList',projectItem.ID, {Deadline:projectItem['Deadline']} ]"><button mat-raised-button color="primary">詳細</button></a>
         <div class="flex-spacer"></div>
         <button mat-raised-button (click)="onDeleteProject(projectItem.ID)" color="warn">削除</button>
     </mat-card-actions>

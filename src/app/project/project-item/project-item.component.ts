@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
 import { ProjectDataService } from 'src/app/services/project-data.service';
 
 @Component({
@@ -11,7 +10,6 @@ export class ProjectItemComponent implements OnInit {
   @Input() projectItem
   @Output() Deleteproject= new EventEmitter()
   constructor(
-    private router: Router,
     private dataService: ProjectDataService,
   ) { }
 

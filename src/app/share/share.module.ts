@@ -6,13 +6,15 @@ import { ConfirmDialogComponent } from './component/confirm-dialog/confirm-dialo
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexDirective } from '../directive/flex.directive';
+import { CountDownComponent } from './component/count-down/count-down.component';
 
-const componentModuleList = [CommonModule,RouterModule,FormsModule,HttpClientModule]
+const componentModuleList = [CommonModule, RouterModule, FormsModule, HttpClientModule,]
+const shareComponentList = [ConfirmDialogComponent, FlexDirective, CountDownComponent]
 
 @NgModule({
-  declarations: [ConfirmDialogComponent,FlexDirective],
+  declarations: [shareComponentList],
   imports: [MaterialModule, componentModuleList],
-  exports: [MaterialModule, componentModuleList],
-  entryComponents:[ConfirmDialogComponent]
+  exports: [MaterialModule, componentModuleList, shareComponentList],
+  entryComponents: [ConfirmDialogComponent]
 })
 export class ShareModule { }
