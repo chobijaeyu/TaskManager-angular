@@ -27,11 +27,10 @@ export class CountDownComponent implements OnInit{
       takeWhile(gap => gap >= 0),
       map(sec => ({
         day: Math.floor(sec / 3600 / 24),
-        hour: Math.floor(sec / 36000 % 24),
+        hour: Math.floor(sec / 3600 % 24),
         minute: Math.floor(sec / 60 % 60),
         second: Math.floor(sec % 60)
       })),
-      tap(val => console.log(val)),
       map(({day,hour,minute,second})=>`後${day}日${hour}時${minute}分${second}秒`)
     )
   }

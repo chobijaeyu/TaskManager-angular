@@ -7,6 +7,6 @@
 </mat-toolbar>
 <mat-list class="task-container">
     <mat-list-item *ngFor="let task of TaskList">
-        <card-task-list [task]="task"></card-task-list>
+        <card-task-list [task]="task" cardDropable></card-task-list>
     </mat-list-item>
 </mat-list>

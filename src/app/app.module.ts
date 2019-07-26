@@ -6,14 +6,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ShareModule } from './share/share.module';
 import { CoreModule } from './core/core.module';
 import { CommonModule } from '@angular/common';
-import { DropDirective } from './directive/drop.directive';
-import { DragDirective } from './directive/drag.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DropDirective,
-    DragDirective,
   ],
   imports: [
     CommonModule,
