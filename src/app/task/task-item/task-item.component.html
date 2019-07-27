@@ -1,4 +1,5 @@
-<div class="items-container" [myHighlight]="'yellow'" [cardDraggable]="true" >
+<div class="items-container" [cardDraggable]="true" [draggedClass]="'drag-start'" [dragData]="itemData"
+    [dragTag]="'task-item'">
     <div class="item-detail">{{itemData.Prefix}}</div>
     <div class="item-detail">No.{{itemData.CurrentNum}}</div>
     <div class="item-detail">{{itemData.Notice}}</div>

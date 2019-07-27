@@ -1,8 +1,8 @@
-<mat-card [ngStyle]="{'overflow-x': 'hidden','overflow-y': 'auto','height': '80vh'}">
+<mat-card [ngStyle]="{'overflow-x': 'hidden','overflow-y': 'auto','height': '80vh'}" cardDropable [dropTags]="['task-item']" [dragEnterClass]="'drag-enter'" (dropped)="handleMove($event)" [id]="taskID">
     <mat-card-title>
         {{task.Title}}
     </mat-card-title>
-    <mat-card-content *ngFor="let item of task.data">
-        <card-task-item [itemData]="item"></card-task-item>
+    <mat-card-content *ngFor="let item of task.data" >
+        <card-task-item [itemData]="item" ></card-task-item>
     </mat-card-content>
 </mat-card>

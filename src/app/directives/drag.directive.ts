@@ -1,23 +1,24 @@
 import { Directive, Input, ElementRef, Renderer2, HostListener } from '@angular/core';
 import { DragDropService } from '../services/drag-drop.service';
 
+
 @Directive({
-  selector: '[cardDraggable][dragTag][draggedClass][dragData]'
+  selector: '[cardDraggable]',
 })
 export class DragDirective {
 
-  private _isDragable = false;
   @Input() dragTag: string;
   @Input() draggedClass: string;
   @Input() dragData: any;
   @Input('cardDraggable')
-  set isDragable(draggable: boolean) {
-    this._isDragable = draggable
-    this.rd.setAttribute(this.el.nativeElement,'draggable',`${draggable}`)
-  };
-
+  set isDraggable(draggable: boolean) {
+    this._isDraggable = draggable;
+    this.rd.setAttribute(this.el.nativeElement, 'draggable', `${draggable}`);
+  }
+  private _isDraggable = false;
+  
   get isDragable() {
-    return this._isDragable
+    return this._isDraggable
   }
 
   constructor(
@@ -26,19 +27,33 @@ export class DragDirective {
     private dragDropService: DragDropService
   ) { }
 
-  @HostListener('dragStart', ['$event'])
-  ondragstart(ev: Event) {
+  @HostListener('dragstart', ['$event'])
+  onDragStart(ev: Event) {
     if (this.el.nativeElement === ev.target) {
-      this.rd.addClass(this.el.nativeElement, this.draggedClass)
+      this.rd.addClass(this.el.nativeElement, this.draggedClass);
       this.dragDropService.setDragData({ tag: this.dragTag, data: this.dragData })
     }
   }
 
-  @HostListener('dragEnd', ['$evnet'])
-  ondragend(ev: Event) {
+  @HostListener('dragend', ['$event'])
+  onDragEnd(ev: Event) {
     if (this.el.nativeElement === ev.target) {
-      this.rd.removeClass(this.el.nativeElement, this.draggedClass)
+      this.rd.removeClass(this.el.nativeElement, this.draggedClass);
     }
   }
+
+
+  // just for test .
+  // @Input() defaultColor: string;
+  // @Input('myHighlight') highlightColor: string;
+  // @HostListener('mouseenter') onMouseEnter() {
+  //   this.highlight(this.highlightColor || this.defaultColor || 'red');
+  // }
+  // @HostListener('mouseleave') onMouseLeave() {
+  //   this.highlight(null);
+  // }
+  // private highlight(color: string) {
+  //   this.el.nativeElement.style.backgroundColor = color;
+  // }
 
 }

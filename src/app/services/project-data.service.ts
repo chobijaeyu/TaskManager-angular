@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 
 
 const projectUrl = `${environment.BaseUrl}project`
+const TaskUrl = `${environment.BaseUrl}task`
 @Injectable({
   providedIn: 'root'
 })
@@ -27,5 +28,12 @@ export class ProjectDataService {
 
   DeleteProject(ID: string): Observable<any> {
     return this.H.delete(`${projectUrl}/${ID}`)
+  }
+
+  UpdateTask(ID: string, Status: string): Observable<any> {
+    let params = new HttpParams()
+    params = params.append("ID", ID)
+    params = params.append("Status", Status)
+    return this.H.put(TaskUrl, params )
   }
 }

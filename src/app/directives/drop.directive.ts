@@ -4,12 +4,12 @@ import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 @Directive({
-  selector: '[cardDropable][dropTags][dragEnterClass]',
+  selector: '[cardDropable]',
 })
 export class DropDirective {
-  @Output() droped: EventEmitter<DragData> = new EventEmitter()
+  @Output() dropped: EventEmitter<DragData> = new EventEmitter()
   @Input() dropTags: string[] = []
-  @Input() drgnEnterClass: string
+  @Input() dragEnterClass: string
   private drag$: Observable<DragData | null>
 
   constructor(
@@ -20,62 +20,61 @@ export class DropDirective {
 
   @HostListener('dragenter', ['$event'])
   onDragEnter(ev: Event) {
-    ev.preventDefault()
-    ev.stopPropagation()
+    ev.preventDefault();
+    ev.stopPropagation();
     if (this.el.nativeElement === ev.target) {
-      this.drag$.subscribe(DragData => {
-        if (DragData && this.dropTags.indexOf(DragData.tag) > -1) {
-          this.rd.addClass(this.el.nativeElement, this.drgnEnterClass)
-          this.rd.setProperty(this.el.nativeElement, 'dataTransfer.effectAllowed', 'all')
-          this.rd.setProperty(this.el.nativeElement, 'dataTransfer.dropEffect', 'move')
+      this.drag$.subscribe(dragData => {
+        if (dragData && this.dropTags.indexOf(dragData.tag) > -1) {
+          this.rd.addClass(this.el.nativeElement, this.dragEnterClass);
+          this.rd.setProperty(this.el.nativeElement, 'dataTransfer.effectAllowed', 'all');
+          this.rd.setProperty(this.el.nativeElement, 'dataTransfer.dropEffect', 'move');
         }
-      })
+      });
     }
   }
 
   @HostListener('dragover', ['$event'])
   onDragOver(ev: Event) {
-    ev.preventDefault()
-    ev.stopPropagation()
+    ev.preventDefault();
+    ev.stopPropagation();
     if (this.el.nativeElement === ev.target) {
-      this.drag$.subscribe(DragData => {
-        if (DragData && this.dropTags.indexOf(DragData.tag) > -1) {
-          this.rd.addClass(this.el.nativeElement, this.drgnEnterClass)
-          this.rd.setProperty(ev, 'dataTransfer.effectAllowed', 'all')
-          this.rd.setProperty(ev, 'dataTransfer.dropEffect', 'move')
+      this.drag$.subscribe(dragData => {
+        if (dragData && this.dropTags.indexOf(dragData.tag) > -1) {
+          this.rd.setProperty(ev, 'dataTransfer.effectAllowed', 'all');
+          this.rd.setProperty(ev, 'dataTransfer.dropEffect', 'move');
         } else {
-          this.rd.setProperty(ev, 'dataTransfer.effectAllowed', 'none')
-          this.rd.setProperty(ev, 'dataTransfer.dropEffect', 'none')
+          this.rd.setProperty(ev, 'dataTransfer.effectAllowed', 'none');
+          this.rd.setProperty(ev, 'dataTransfer.dropEffect', 'none');
         }
-      })
+      });
     }
   }
 
   @HostListener('dragleave', ['$event'])
   onDragLeave(ev: Event) {
-    ev.preventDefault()
-    ev.stopPropagation()
+    ev.preventDefault();
+    ev.stopPropagation();
     if (this.el.nativeElement === ev.target) {
-      this.drag$.subscribe(DragData => {
-        if (DragData && this.dropTags.indexOf(DragData.tag) > -1) {
-          this.rd.removeClass(this.el.nativeElement, this.drgnEnterClass)
+      this.drag$.subscribe(dragData => {
+        if (dragData && this.dropTags.indexOf(<string>dragData.tag) > -1) {
+          this.rd.removeClass(this.el.nativeElement, this.dragEnterClass);
         }
-      })
+      });
     }
   }
 
   @HostListener('drop', ['$event'])
   onDrop(ev: Event) {
-    ev.preventDefault()
-    ev.stopPropagation()
-    if (this.el.nativeElement == ev.target) {
-      this.drag$.subscribe(DragData => {
-        if (DragData && this.dropTags.indexOf(DragData.tag) > -1) {
-          this.rd.removeClass(this.el.nativeElement, this.drgnEnterClass)
-          this.droped.emit(DragData)
-          this.dragDropService.clearDragData()
+    ev.preventDefault();
+    ev.stopPropagation();
+    if (this.el.nativeElement === ev.target) {
+      this.drag$.subscribe(dragData => {
+        if (dragData && this.dropTags.indexOf(dragData.tag) > -1) {
+          this.rd.removeClass(this.el.nativeElement, this.dragEnterClass);
+          this.dropped.emit(dragData);
+          this.dragDropService.clearDragData();
         }
-      })
+      });
     }
   }
 

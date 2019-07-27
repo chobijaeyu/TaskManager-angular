@@ -1,24 +1,34 @@
-import { Component, OnInit, Input, AfterContentInit, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ProjectDataService } from 'src/app/services/project-data.service';
 
 @Component({
   selector: 'card-task-list',
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.sass']
 })
-export class TaskListComponent implements OnInit,AfterViewInit {
+export class TaskListComponent implements OnInit {
 
   @Input() task
-
+  @Output() dataChanged: EventEmitter<any> = new EventEmitter()
+  taskID
   item = []
-  constructor() { }
+  constructor(private dataService: ProjectDataService, ) { }
 
   ngOnInit() {
+    this.taskID = this.task['Status']
   }
-  
-  ngAfterViewInit(): void {
-    //Called after ngOnInit when the component's or directive's content has been initialized.
-    //Add 'implements AfterContentInit' to the class.
-    
+
+  handleMove(ev) {
+    this.dataService.UpdateTask(ev.data['ID'], this.taskID).subscribe(
+      res => {
+        console.log(res),
+        ev.data['Status'] = this.taskID
+        // ev.data = Object.assign(ev.data,{changedTo:this.taskID})
+          this.dataChanged.emit(this.taskID)
+
+      },
+      err => console.error(err)
+    )
 
   }
 }

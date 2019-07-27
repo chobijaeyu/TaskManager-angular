@@ -1,12 +1,12 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, AfterViewInit, AfterViewChecked, AfterContentInit } from '@angular/core';
 import { Observable, interval } from 'rxjs';
-import { map, takeWhile, tap } from 'rxjs/operators';
+import { map, takeWhile, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'card-count-down',
   templateUrl: './count-down.component.html',
   styleUrls: ['./count-down.component.sass'],
-  changeDetection:ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CountDownComponent implements OnInit{
   @Input() startDate = new Date()
@@ -18,11 +18,13 @@ export class CountDownComponent implements OnInit{
   constructor() { }
 
   ngOnInit() {
-    this.countDown$ = this.getCountDownObservale(this.startDate,this.futurDate)
+    console.log(this.futurDate)
+    this.countDown$ = this.getCountDownObservale(this.startDate, this.futurDate)
   }
 
   private getCountDownObservale(startDate: Date, futurDate: Date) {
     return interval(1000).pipe(
+      filter(() => futurDate !== undefined),
       map(elapse => this.diffInSec(startDate, futurDate) - elapse),
       takeWhile(gap => gap >= 0),
       map(sec => ({
@@ -31,7 +33,7 @@ export class CountDownComponent implements OnInit{
         minute: Math.floor(sec / 60 % 60),
         second: Math.floor(sec % 60)
       })),
-      map(({day,hour,minute,second})=>`後${day}日${hour}時${minute}分${second}秒`)
+      map(({ day, hour, minute, second }) => `後${day}日${hour}時${minute}分${second}秒`)
     )
   }
 

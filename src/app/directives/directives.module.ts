@@ -6,7 +6,7 @@ import { DragDropService, DragData } from '../services/drag-drop.service';
 import { HighlightDirective } from './highlight.directive';
 
 
-const directivesList = [DragDirective, DropDirective, FlexDirective,HighlightDirective]
+const directivesList = [DragDirective, DropDirective, FlexDirective,]
 @NgModule({
     declarations:[directivesList],
     imports: [],
