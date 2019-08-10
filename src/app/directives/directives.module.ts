@@ -3,7 +3,6 @@ import { DragDirective } from './drag.directive';
 import { DropDirective } from './drop.directive';
 import { FlexDirective } from './flex.directive';
 import { DragDropService, DragData } from '../services/drag-drop.service';
-import { HighlightDirective } from './highlight.directive';
 
 
 const directivesList = [DragDirective, DropDirective, FlexDirective,]

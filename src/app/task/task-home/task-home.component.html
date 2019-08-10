@@ -1,7 +1,9 @@
 <mat-toolbar>
     <div class="header-container">
         <div>{{ProjectData["Deadline"] | date:'y/M/d, H:mm:ss '}}　まで</div>
-        <div cardFlex>残り時間: <card-count-down [futurDate]="futurDate$ | async"></card-count-down> </div>
+        <!-- <div cardFlex>残り時間: <card-count-down [futurDate]="futurDate$ | async"></card-count-down> </div> -->
+        <div cardFlex>残り時間: <card-count-down [futurDate]="futurDate"></card-count-down> </div>
+        <div></div>
         <div></div>
     </div>
 </mat-toolbar>
