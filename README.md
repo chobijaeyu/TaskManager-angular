@@ -1,4 +1,4 @@
-# CardTask
+# TaskManager
 
 👨‍💻**practice project,do not use to production.**
 
@@ -14,4 +14,5 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 - [x] task list view
 - [x] create task list
 - [x] drag and drop task item
+- [ ] websocket
 - [ ] test
